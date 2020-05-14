@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	<meta charset="UTF-8">
+    <meta http-eqiv="X=UA-compatible" content="oe=edge">
+	<link rel="stylesheet" type="text/css" href="styles.css" /><link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"  ></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<title>Dijkstra</title>
+		
+	</head>
+	<body style="background-color:#333">
+
+
+	<section id="Nav-bar">
+        <nav class="navbar navbar-expand-lg navbar-light">
+			<a class="navbar-brand" href="#"><img src="img/tce-logo.png"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+    </ul>
+  </div>
+</nav>
+
+     </section>
+
+
+
+	<br><br>
+		<center>
+					<form>
+
+						<div class="titles"><label><b>CURRENT LOCATION</b></label></div>
+						  <select id="country">
+							<option value="None" selected>-- Select --</option>
+							<option value="Home">Home</option>
+							<option value="Priya medicals">Priya medicals</option>
+							<option value="Sri Om Pharmacy">Sri Om Pharmacy</option>
+							<option value="Ramalingam Grocery">Ramalingam Grocery</option>
+							<option value="Govt Hospital">Govt Hospital</option>
+							<option value="Hatsun Dairy Shop">Hatsun Dairy Shop</option>
+							<option value="Aravind Eye Hospital">Aravind Eye Hospital</option>
+							<option value="Nagaraj Grocery">Nagaraj Grocery</option>
+						  </select>
+							<br><br>
+						<div class="titles"><label><b>DESTINATION LOCATION</b></label></div>
+							<<select id="shopping">
+							  <option value="None" selected>-- Select --</option>
+							  <option value="medical">Nearby medical shop</option>
+							  <option value="hospital">Nearby hospital</option>
+							  <option value="grocery">Nearby grocery shop</option>
+							  <option value="Hatsun Dairy Shop">Nearby milk shop</option>
+							  <option value="Home">Home</option>
+							</select> <br><br>
+						<button type="button" onclick="solve()">Search</button>
+						</form>
+<br>
+<div class="titles"><p id="result"></p></div>
+						  <br>
+						<img src="map.jpg" id="mapp" height="468px" width="547px">
+
+
+			<br><br><br>
+			<iframe src="https://www.google.com/maps/embed?pb=!1m66!1m12!1m3!1d6637.071224706659!2d77.98341530473768!3d9.825974931727867!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m51!3e0!4m5!1s0x3b00d24ea9a38a4d%3A0xaf40c4011b65753c!2sKklm%20Jummah%20Masjid%2C%20NH%2044%2C%20Tirumangalam%2C%20Tamil%20Nadu%20625706!3m2!1d9.8216285!2d77.98597629999999!4m5!1s0x3b00d24ef488c021%3A0xf67ff84d7877d0b6!2sAravind%20Eye%20Hospital%20-%20Tirumangalam%2C%20Tirumangalam%2C%20Tamil%20Nadu!3m2!1d9.8275083!2d77.9891947!4m5!1s0x3b00d24de6e3a597%3A0xab54d91854d822ce!2sGovernment%20Hospital%2C%20Tirumangalam%2C%20Madurai%20District%2C%20Munchief%20Court%20Raod%2C%20Tirumangalam%2C%20Tamil%20Nadu!3m2!1d9.825511599999999!2d77.98652!4m5!1s0x3b00d3c73f39e0d9%3A0xf035503ae0d48a04!2spriya%20medical!3m2!1d9.8223592!2d77.9853517!4m5!1s0x3b00d25270b5329f%3A0xf6581603d842de50!2sN.%20Ramalingam%20Grocery%20Shop!3m2!1d9.823936!2d77.984928!4m5!1s0x3b00d24e53aaaaad%3A0x38538842294c7398!2sNAGARAJ%20STORE!3m2!1d9.828577!2d77.9876049!4m5!1s0x3b00d24d9e579993%3A0x626538316259506f!2sSRI%20OM%20PHARMACY!3m2!1d9.8233923!2d77.9864941!4m3!3m2!1d9.8246482!2d77.9822611!4m3!3m2!1d9.8216591!2d77.98597219999999!5e0!3m2!1sen!2sin!4v1589277259928!5m2!1sen!2sin" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+			<br><br>
+
+		</center>
+	</body>
+</html>
+
+
+<script type="text/javascript">
+
+	
+function solve() {
+
+var graph = {
+    "Home": {"Priya medicals":120, "Sri Om Pharmacy":210},
+    "Priya medicals": {Home:120, "Ramalingam Grocery":450},
+    "Sri Om Pharmacy": {Home:210, "Ramalingam Grocery":230, "Govt Hospital":400, "Aravind Eye Hospital": 950},
+    "Ramalingam Grocery": {"Priya medicals":450, "Sri Om Pharmacy":230, "Govt Hospital":550, "Hatsun Dairy Shop":300, "Aravind Eye Hospital":1100},
+    "Govt Hospital": {"Sri Om Pharmacy":400, "Ramalingam Grocery":550, "Hatsun Dairy Shop":550},
+    "Hatsun Dairy Shop": {"Ramalingam Grocery":300, "Govt Hospital":550, "Nagaraj Grocery":950},
+    "Aravind Eye Hospital": {"Sri Om Pharmacy":950, "Ramalingam Grocery":1100, "Nagaraj Grocery":400},
+    "Nagaraj Grocery": {"Hatsun Dairy Shop":950, "Aravind Eye Hospital":400},
+	};
+
+var e = document.getElementById("country");
+var curr = e.options[e.selectedIndex].value;
+
+var f = document.getElementById("shopping");
+var dest = f.options[f.selectedIndex].value;
+
+var s = curr;
+var start = s;
+
+
+    var solutions = {};
+    solutions[s] = [];
+    solutions[s].dist = 0;
+    while(true) {
+        var parent = null;
+        var nearest = null;
+        var dist = Infinity;
+
+        for(var n in solutions) {
+            var adj = graph[n];
+            for(var a in adj) {
+                if(solutions[a])
+                    continue;
+                var len = adj[a];
+                if(len < dist) {
+                    parent = solutions[n];
+                    nearest = a;
+                    dist = len;
+                }
+            }
+        }
+
+        if(dist === Infinity) {
+            break; //no solution
+        }
+
+        solutions[nearest] = parent.concat(nearest);
+        solutions[nearest].dist = parent.dist + dist;
+    }
+
+		if((dest.localeCompare("None")==0) || (dest.localeCompare("None")==0))
+		{
+		document.getElementById("result").innerHTML = "<br>Invalid Input";
+		}
+
+		else if(dest.localeCompare(curr)==0)
+		{
+		document.getElementById("result").innerHTML = "<br>Are you a fool??";
+		}
+
+		else if(dest.localeCompare("Hatsun Dairy Shop")==0)
+		{
+					s="Hatsun Dairy Shop";
+    				document.getElementById("result").innerHTML = "<br>The nearest Milk Store from " + start + " is <b>The " + s + "</b> <br><br> The Fastest route to reach the destination is  <br> <h6>" + start + " --> " + solutions[s].join(" --> ") + " </h6><br>( Distance : " + solutions[s].dist +"m )";
+		}
+
+		else if(dest.localeCompare("Home")==0)
+		{
+					s="Home";
+    				document.getElementById("result").innerHTML = "<br>The Fastest route to reach your home is  <br> <h6>" + start + " --> " + solutions[s].join(" --> ") + " </h6><br>( Distance : " + solutions[s].dist +"m )";
+
+		}
+
+		else if(dest.localeCompare("hospital")==0)
+		{
+
+			if (curr.localeCompare("Aravind Eye Hospital")==0)
+			{
+				s="Govt Hospital";
+			}
+			else if (curr.localeCompare("Govt Hospital")==0)
+			{
+				s="Aravind Eye Hospital";
+			}
+			else if( solutions["Govt Hospital"].dist < solutions["Aravind Eye Hospital"].dist)
+				{
+					s="Govt Hospital";
+   				}
+			else
+				{
+					s="Aravind Eye Hospital";
+    			}
+    		document.getElementById("result").innerHTML = "<br>The nearest Hospital from " + start + " is <b>The " + s + "</b> <br><br> The Fastest route to reach the destination is  <br> <h6>" + start + " --> " + solutions[s].join(" --> ") + " </h6><br>( Distance : " + solutions[s].dist +"m )";
+		}
+
+		else if(dest.localeCompare("medical")==0)
+		{
+			if (curr.localeCompare("Priya medicals")==0)
+			{
+				s="Sri Om Pharmacy";
+			}
+			else if (curr.localeCompare("Sri Om Pharmacy")==0)
+			{
+				s="Priya medicals";
+			}
+			else if( solutions["Priya medicals"].dist < solutions["Sri Om Pharmacy"].dist)
+				{
+					s="Priya medicals";
+				}
+			else
+				{
+					s="Sri Om Pharmacy";
+				}
+		document.getElementById("result").innerHTML = "<br>The nearest Medical Store from " + start + " is <b>The " + s + "</b> <br><br> The Fastest route to reach the destination is  <br> <h6>" + start + " --> " + solutions[s].join(" --> ") + " </h6><br>( Distance : " + solutions[s].dist +"m )";
+
+		}
+
+		else if(dest.localeCompare("grocery")==0)
+		{
+			if (curr.localeCompare("Ramalingam Grocery")==0)
+			{
+				s="Nagaraj Grocery";
+			}
+			else if (curr.localeCompare("Nagaraj Grocery")==0)
+			{
+				s="Ramalingam Grocery";
+			}
+			else if( solutions["Ramalingam Grocery"].dist < solutions["Nagaraj Grocery"].dist)
+				{
+					s="Ramalingam Grocery";
+				}
+			else
+				{
+					s="Nagaraj Grocery";
+				}
+		document.getElementById("result").innerHTML = "<br>The nearest Grocery Shop from " + start + " is <b>The " + s + "</b> <br><br> The Fastest route to reach the destination is  <br> <h6>" + start + " --> " + solutions[s].join(" --> ") + " </h6><br>( Distance : " + solutions[s].dist +"m )";
+
+		}
+
+    return solutions;
+
+    }
+		</script>
+
