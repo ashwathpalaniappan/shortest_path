@@ -59,9 +59,13 @@
 <div class="titles2"><p id="result"></p></div>
 						  <br>
 			<img src="img/map.jpg" id="mapp" height="468px" width="547px" class="contain">
+			<br><br><br><br>
+			<div class="titles"><label><b>GRAPH:</b></label></div> <br>
+			<img src="graph.jpg" id="mapp" height="468px" width="547px" class="contain2">
 
 
-			<br><br><br>
+			<br><br><br><br><br>
+			<div class="titles"><label><b>MAP REFERRED:</b></label></div> <br>
 			<iframe
 					aria-hidden="false" class="contain1" frameborder="0" height="450" src="https://www.google.com/maps/embed?pb=!1m66!1m12!1m3!1d6637.071224706659!2d77.98341530473768!3d9.825974931727867!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m51!3e0!4m5!1s0x3b00d24ea9a38a4d%3A0xaf40c4011b65753c!2sKklm%20Jummah%20Masjid%2C%20NH%2044%2C%20Tirumangalam%2C%20Tamil%20Nadu%20625706!3m2!1d9.8216285!2d77.98597629999999!4m5!1s0x3b00d24ef488c021%3A0xf67ff84d7877d0b6!2sAravind%20Eye%20Hospital%20-%20Tirumangalam%2C%20Tirumangalam%2C%20Tamil%20Nadu!3m2!1d9.8275083!2d77.9891947!4m5!1s0x3b00d24de6e3a597%3A0xab54d91854d822ce!2sGovernment%20Hospital%2C%20Tirumangalam%2C%20Madurai%20District%2C%20Munchief%20Court%20Raod%2C%20Tirumangalam%2C%20Tamil%20Nadu!3m2!1d9.825511599999999!2d77.98652!4m5!1s0x3b00d3c73f39e0d9%3A0xf035503ae0d48a04!2spriya%20medical!3m2!1d9.8223592!2d77.9853517!4m5!1s0x3b00d25270b5329f%3A0xf6581603d842de50!2sN.%20Ramalingam%20Grocery%20Shop!3m2!1d9.823936!2d77.984928!4m5!1s0x3b00d24e53aaaaad%3A0x38538842294c7398!2sNAGARAJ%20STORE!3m2!1d9.828577!2d77.9876049!4m5!1s0x3b00d24d9e579993%3A0x626538316259506f!2sSRI%20OM%20PHARMACY!3m2!1d9.8233923!2d77.9864941!4m3!3m2!1d9.8246482!2d77.9822611!4m3!3m2!1d9.8216591!2d77.98597219999999!5e0!3m2!1sen!2sin!4v1589277259928!5m2!1sen!2sin"
 					style="border:0;" tabindex="0" width="600"></iframe>
@@ -80,11 +84,11 @@ function solve() {
 var graph = {
     "Home": {"Priya medicals":120, "Sri Om Pharmacy":210},
     "Priya medicals": {"Ramalingam Grocery":570, "Home":120},
-    "Sri Om Pharmacy": {"Home":210, "Ramalingam Grocery":230, "Govt Hospital":400, "Aravind Eye Hospital": 950},
+    "Sri Om Pharmacy": {"Home":210, "Ramalingam Grocery":230, "Govt Hospital":400, "Aravind Eye Hospital": 1050},
     "Ramalingam Grocery": {"Priya medicals":570, "Nagaraj Grocery":950 , "Sri Om Pharmacy":230, "Aravind Eye Hospital":800, "Govt Hospital":640, "Hatsun Dairy Shop":300},
     "Govt Hospital": {"Sri Om Pharmacy":400, "Ramalingam Grocery":640},
     "Hatsun Dairy Shop": {"Ramalingam Grocery":300},
-    "Aravind Eye Hospital": {"Sri Om Pharmacy":950, "Nagaraj Grocery":400, "Ramalingam Grocery":800},
+    "Aravind Eye Hospital": {"Sri Om Pharmacy":1050, "Nagaraj Grocery":400, "Ramalingam Grocery":800},
     "Nagaraj Grocery": {"Ramalingam Grocery":950 , "Aravind Eye Hospital":400},
 	};
 

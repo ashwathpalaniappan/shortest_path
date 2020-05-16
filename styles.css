@@ -52,6 +52,10 @@ height: 60px;
     width: 910px;
 }
 
+.contain2{
+    height: 617px;
+    width: 719px;
+}
 
 @media (min-width: 1080px)
 {
@@ -81,6 +85,10 @@ font-size: 1rem;
     width: 1180px;
 }
 .contain{
+    height: 468px;
+    width: 547px;
+}
+.contain2{
     height: 468px;
     width: 547px;
 }
